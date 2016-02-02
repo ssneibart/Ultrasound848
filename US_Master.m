@@ -5,7 +5,9 @@
 clear; close all; clc;
 
 %% Load Data
+cd ./data/
 M = readBinData('imageData_Focused.bin'); % M = SampleNumber x ElementNumber x A-Line
+cd ..
 
 %% Constants
 ElementSpacing = 0.0201; % cm
