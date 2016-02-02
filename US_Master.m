@@ -8,14 +8,7 @@ clear; close all; clc;
 cd ./data/
 [M, NumbSamples, NumbElements, NumbLines, ...
     ElementSpacing, BeamSpacing, ...
-    fs, c, Focus, t0] = loadData();
-
-F_bf = 2.5; % cm
-bw = 0.55; 
-x = 0.6; % compressive value
-
-ReceiveAperture = F_bf/2;
-ReceiveDepth = 3; % cm
+    fs, c, FocusR, FocusT, t0, FNumb] = loadData();
 
 %% Other Constants
 cd ..
@@ -24,7 +17,7 @@ F_bf = 2.5; % cm
 bw = 0.55; 
 x = 0.6; % compressive value
 
-ReceiveAperture = F_bf/2;
+ReceiveAperture = FocusR/FNumb;
 ReceiveDepth = 3; % cm
 
 
@@ -34,23 +27,16 @@ dt = 1/fs; % s
 dx = c*dt; % cm 
 
 %% Other
-FocalIndex = Focus./dx; % index
+FocalIndex = FocusR./dx; % index
 
 %% Spatial Location
 [BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator(BeamSpacing, NumbLines, ElementSpacing, NumbElements, dx, NumbSamples,t0);
 
-%% Final
-Delay = zeros(1,20);
-disp(size(M(:,:,21)));
+%% Delay Calculations
+[DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
+
+%% Other
 Vq = interp2(M(:,:,21),1:192,FocalIndex);
-
-[X,Y] = meshgrid(BeamLocations,ElementLocations); % Can cut down element locations
-D = Y-X; % Columns are associated with the beamlocation and the rows are associated with which element
-
-Distance = sqrt(D.^2 + Focus.^2);
-DistanceDifference = Distance - 3;
-DistanceIndex = DistanceDifference./dx;
-TimeDelay = DistanceDifference./c./100;
 
 %% Visualization
 figure
