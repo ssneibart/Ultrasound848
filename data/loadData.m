@@ -1,5 +1,5 @@
 function [M, NumbSamples, NumbElements, NumbLines, ElementSpacing, ...
-          BeamSpacing, fs, c, Focus] = loadData()
+          BeamSpacing, fs, c, Focus, t0] = loadData()
 %loadParams loads the PreParams for US Reconstruction
 %   Running this function will output a vector PreParams
 %   
@@ -17,6 +17,7 @@ ElementSpacing = 0.0201; % cm
 BeamSpacing = 0.0177; % cm
 fs = 40e6; % Hz
 Focus = 3; % cm
+t0 = 10; % index of t0
 
 end
 

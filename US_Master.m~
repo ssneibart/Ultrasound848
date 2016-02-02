@@ -31,13 +31,11 @@ ReceiveDepth = 3; % cm
 
 %% Time and Space Intervals
 dt = 1/fs; % s
-dx = c*dt; % cm 
-
-%% Other
-FocalIndex = Focus./dx; % index
+dx = c*dt*100; % cm 
+%FocalIndex = Focus./dx; % index
 
 %% Spatial Location
-[BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator(BeamSpacing, NumbLines, ElementSpacing, NumbElements, dx, NumbSamples,t0);
+[BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator()
 
 %% Final
 Delay = zeros(1,20);
