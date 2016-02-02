@@ -33,7 +33,7 @@ FocalIndex = FocusR./dx; % index
 [BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator(BeamSpacing, NumbLines, ElementSpacing, NumbElements, dx, NumbSamples,t0);
 
 %% Delay Calculations
-[DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
+[LatereralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
 %% Other
 Vq = interp2(M(:,:,21),1:192,FocalIndex);
