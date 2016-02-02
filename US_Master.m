@@ -6,7 +6,17 @@ clear; close all; clc;
 
 %% Load Data
 cd ./data/
-M = readBinData('imageData_Focused.bin'); % M = SampleNumber x ElementNumber x A-Line
+[M, NumbSamples, NumbElements, NumbLines, ...
+    ElementSpacing, BeamSpacing, ...
+    fs, c, Focus] = loadData();
+
+F_bf = 2.5; % cm
+bw = 0.55; 
+x = 0.6; % compressive value
+
+ReceiveAperture = F_bf/2;
+ReceiveDepth = 3; % cm
+
 cd ..
 
 %% Constants
