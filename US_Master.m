@@ -42,9 +42,22 @@ DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElem
 %% Sum Elements With No Apodization
 SummedRF = sum(DelayedCroppedSamples,2);
 SummedRF = reshape(SummedRF,1949,41);
-% plot RF for beam 21
-figure
-plot(SummedRF(:,21))
+% % plot RF for beam 21
+% figure
+% plot(SummedRF(:,21))
+
+%% Generate Ultrasound Image from RF Data
+rfMatrix = SummedRF;
+envDet = abs(hilbert(rfMatrix));
+logComp = db(envDet);
+colorLim = [0 50]; % set the range of values to scale into
+dist = c/fs/2; %find the distance between each sample
+avgLatmm = (min(ElementLocations)+max(ElementLocations))/2; % find the average lateral position
+imagesc([min(ElementLocations)-avgLatmm max(ElementLocations)-avgLatmm ], [0 length(logComp(:,1))*dist], logComp, colorLim);
+colormap(gray);
+title('Phantom');
+xlabel('mm');
+ylabel('mm');
 
 % %% Visualization
 % figure
