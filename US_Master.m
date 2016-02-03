@@ -3,11 +3,12 @@
 %% Start
 clear; close all; clc;
 
-%% Load Data
+%% Load Data and Constants
 cd ./data/ % go into data directory
-[M, NumbSamples, NumbElements, NumbLines, ...
-    ElementSpacing, BeamSpacing, ...
-    fs, c, FocusR, FocusT, t0, FNumb] = loadData();
+[M,NumbLines,NumbElements,NumbSamples] = readBinData('imageData_Focused.bin');
+[ElementSpacing] = readTransducerParams();
+[BeamSpacing, fs, FocusR, FocusT, FNumb, t0] = readImageParams();
+[c] = readConstants();
 cd .. % go back to coding directory
 
 %% Other Constants
