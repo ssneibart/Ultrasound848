@@ -1,5 +1,4 @@
 %% US Master Code
-% Help Information
 
 %% Start
 clear; close all; clc;
@@ -32,12 +31,12 @@ FocalIndex = FocusR./dx; % index
 [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
 %% Compute Aperture Elements to Include for All Beams
-IncludedApertureElements = ComputeApertureElements(LateralDistanceMatrix, FocusR, FNumb);
+numElements_HalfAperture, CenterElementNum  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
 
 %% Compute Included Samples in Aperture
-SamplesInAperture = ChopSamplesToAperture( M, IncludedApertureElements, NumbSamples ); % no delays applied yet
+% SamplesInAperture = ChopSamplesToAperture( M, IncludedApertureElements, NumbSamples ); % no delays applied yet
 
-%% 
+%% Apply Delays to Channel Data using Truncation Method
 
 
 %% Other
