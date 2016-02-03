@@ -37,6 +37,14 @@ FocalIndex = FocusR./dx; % index
 DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Sum Samples Using Apodization
+% to do
+
+%% Sum Elements With No Apodization
+SummedRF = sum(DelayedCroppedSamples,2);
+SummedRF = reshape(SummedRF,1949,41);
+% plot RF for beam 21
+figure
+plot(SummedRF(:,21))
 
 % %% Visualization
 % figure
@@ -46,5 +54,3 @@ DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElem
 % plot(zeros(1,length(SampleLocations)),SampleLocations,'r.')
 % plot([-2 2],[3 3], 'g-')
 % axis([-2 2 0 8])
-
-
