@@ -8,7 +8,7 @@ function [LateralDistanceMatrix,DistanceIndexMatrix] = DelayCalculator(BeamLocat
 LateralDistanceMatrix = ElementLocationsMatrix - BeamLocationsMatrix;
 DistanceMatrix = sqrt(LateralDistanceMatrix.^2+Focus.^2);
 DistanceDifferenceMatrix = DistanceMatrix - Focus;
-DistanceIndexMatrix = DistanceDifferenceMatrix./dx;
+DistanceIndexMatrix = round(DistanceDifferenceMatrix./dx); % gives delay index for how many samples away
 
 end
 
