@@ -29,22 +29,31 @@ dx = c*dt; % cm
 %% Other
 FocalIndex = FocusR./dx; % index
 
-%% Spatial Location
+%% Spatial Location Calculations
 [BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator(BeamSpacing, NumbLines, ElementSpacing, NumbElements, dx, NumbSamples,t0);
 
 %% Delay Calculations
 [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
-%% Other
-Vq = interp2(M(:,:,21),1:192,FocalIndex);
+%% Compute Aperture Elements to Include for All Beams
+IncludedApertureElements = ComputeApertureElements(LateralDistanceMatrix, FocusR, FNumb);
 
-%% Visualization
-figure
-hold on
-plot(BeamLocations,zeros(1,length(BeamLocations)),'k*')
-plot(ElementLocations,1/10*ones(1,length(ElementLocations)),'b*')
-plot(zeros(1,length(SampleLocations)),SampleLocations,'r.')
-plot([-2 2],[3 3], 'g-')
-axis([-2 2 0 8])
+%% Compute Included Samples in Aperture
+SamplesInAperture = ChopSamplesToAperture( M, IncludedApertureElements, NumbSamples ); % no delays applied yet
+
+%% 
+
+
+%% Other
+% Vq = interp2(M(:,:,21),1:192,FocalIndex);
+
+% %% Visualization
+% figure
+% hold on
+% plot(BeamLocations,zeros(1,length(BeamLocations)),'k*')
+% plot(ElementLocations,1/10*ones(1,length(ElementLocations)),'b*')
+% plot(zeros(1,length(SampleLocations)),SampleLocations,'r.')
+% plot([-2 2],[3 3], 'g-')
+% axis([-2 2 0 8])
 
 
