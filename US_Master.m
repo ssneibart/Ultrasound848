@@ -5,22 +5,18 @@
 clear; close all; clc;
 
 %% Load Data
-cd ./data/
+cd ./data/ % go into data directory
 [M, NumbSamples, NumbElements, NumbLines, ...
     ElementSpacing, BeamSpacing, ...
     fs, c, FocusR, FocusT, t0, FNumb] = loadData();
+cd .. % go back to coding directory
 
 %% Other Constants
-cd ..
-
 F_bf = 2.5; % cm
 bw = 0.55; 
 x = 0.6; % compressive value
-
 ReceiveAperture = FocusR/FNumb;
 ReceiveDepth = 3; % cm
-
-
 
 %% Time and Space Intervals
 dt = 1/fs; % s
