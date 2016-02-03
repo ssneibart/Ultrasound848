@@ -30,17 +30,13 @@ FocalIndex = FocusR./dx; % index
 %% Delay Calculations
 [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
-%% Compute Aperture Elements to Include for All Beams
-numElements_HalfAperture, CenterElementNum  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
+%% Compute Center Elements in Aperture for All Beams
+[numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
 
-%% Compute Included Samples in Aperture
-% SamplesInAperture = ChopSamplesToAperture( M, IncludedApertureElements, NumbSamples ); % no delays applied yet
+%% Delay and Crop Samples using Truncation and Include only Elements in Aperture
+DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
-%% Apply Delays to Channel Data using Truncation Method
-
-
-%% Other
-% Vq = interp2(M(:,:,21),1:192,FocalIndex);
+%% Sum Samples Using Apodization
 
 % %% Visualization
 % figure
