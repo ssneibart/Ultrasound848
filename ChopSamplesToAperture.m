@@ -9,8 +9,6 @@ ExpandedApertureElements = repmat(IncludedApertureElements, 1, 1, NumbSamples);
 % Permute 3d matrix to match dimensions of bin data
 ExpandedApertureElements = permute(ExpandedApertureElements,[3 1 2]);
 
-size(ExpandedApertureElements)
-
 % Compute samples in aperture by matrix element multiplication
 SamplesInAperture = ExpandedApertureElements.*M;
 
