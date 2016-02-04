@@ -19,9 +19,9 @@ CenterBeam = ceil(NumbLines/2); % Center Beam is 21st line
 for beamIndex = 1:NumbLines
     FirstApertureElement = CenterElementNum(beamIndex)-numElements_HalfAperture; % computes element number of first element included in aperture
     for ApertureElementIndex = 1:NumIncludedElementsAperture
-        delay = DistanceIndexMatrix(FirstApertureElement-1+ApertureElementIndex,beamIndex);
+        delay = DistanceIndexMatrix(FirstApertureElement,beamIndex);
         for SampIndex = 1:NumIncludedSamples
-            DelayedCroppedSingleBeamSamples(SampIndex,ApertureElementIndex,beamIndex) = M(  delay+SampIndex, ...
+            DelayedCroppedSingleBeamSamples(SampIndex,ApertureElementIndex,beamIndex) = M(  delay-1+SampIndex, ...
                                                             FirstApertureElement-1+ApertureElementIndex,...
                                                             CenterBeam); 
                                                         

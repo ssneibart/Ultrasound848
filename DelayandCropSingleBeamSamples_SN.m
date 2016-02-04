@@ -1,4 +1,4 @@
-function [ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines )
+function [ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_SN( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines )
 %Applies time delays and crops samples to give matrix with cropped and
 %delayed samples
 
@@ -16,12 +16,17 @@ NumIncludedElementsAperture = 2*numElements_HalfAperture + 1;
 %% Loop to Delay and Crop Samples for each Beam
 DelayedCroppedSingleBeamSamples = zeros(NumIncludedSamples,NumIncludedElementsAperture, NumbLines); % preallocate for speed
 CenterBeam = ceil(NumbLines/2); % Center Beam is 21st line
+N = M(:,:,21);
+FirstApertureElement = CenterElementNum - numElements_HalfAperture;
+beamIndex = [1:41];
+delay = DistanceIndexMatrix(FirstApertureElement,beamIndex);
+
 for beamIndex = 1:NumbLines
     FirstApertureElement = CenterElementNum(beamIndex)-numElements_HalfAperture; % computes element number of first element included in aperture
     for ApertureElementIndex = 1:NumIncludedElementsAperture
-        delay = DistanceIndexMatrix(FirstApertureElement-1+ApertureElementIndex,beamIndex);
+        delay = DistanceIndexMatrix(FirstApertureElement,beamIndex);
         for SampIndex = 1:NumIncludedSamples
-            DelayedCroppedSingleBeamSamples(SampIndex,ApertureElementIndex,beamIndex) = M(  delay+SampIndex, ...
+            DelayedCroppedSingleBeamSamples(SampIndex,ApertureElementIndex,beamIndex) = M(  delay-1+SampIndex, ...
                                                             FirstApertureElement-1+ApertureElementIndex,...
                                                             CenterBeam); 
                                                         
@@ -29,4 +34,3 @@ for beamIndex = 1:NumbLines
     end
 
 end
-
