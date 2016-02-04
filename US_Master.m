@@ -41,7 +41,7 @@ DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElem
 DelayedCroppedSingleBeamSamples  = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Sum Samples Using Apodization
-rfData = ApodizeAndSumSamples( DelayedCroppedSamples );
+rfData = ApodizeAndSumSamples( DelayedCroppedSingleBeamSamples );
 
 %% Constants for Image Generation
 fc = 4*10^6; 
