@@ -18,9 +18,9 @@ DelayedCroppedSamples = zeros(NumIncludedSamples,NumIncludedElementsAperture, Nu
 for beamIndex = 1:NumbLines
     FirstApertureElement = CenterElementNum(beamIndex)-numElements_HalfAperture; % computes element number of first element included in aperture
     for ApertureElementIndex = 1:NumIncludedElementsAperture
-        delay = DistanceIndexMatrix(FirstApertureElement,beamIndex);
+        delay = DistanceIndexMatrix(FirstApertureElement-1+ApertureElementIndex,beamIndex);
         for SampIndex = 1:NumIncludedSamples
-            DelayedCroppedSamples(SampIndex,ApertureElementIndex,beamIndex) = M(  delay-1+SampIndex, ...
+            DelayedCroppedSamples(SampIndex,ApertureElementIndex,beamIndex) = M(  delay+SampIndex, ...
                                                             FirstApertureElement-1+ApertureElementIndex,...
                                                             beamIndex); 
         end
