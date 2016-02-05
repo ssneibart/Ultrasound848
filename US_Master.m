@@ -38,7 +38,7 @@ FocalIndex = FocusR./dx; % index
 DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Delay and Crop Samples for CenterLineData from Single Beam
-DelayedCroppedSingleBeamSamples  = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+[ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
 
 %% Sum Samples Using Apodization
 rfData = ApodizeAndSumSamples( DelayedCroppedSamples );
