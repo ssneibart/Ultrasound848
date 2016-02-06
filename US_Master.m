@@ -38,7 +38,10 @@ FocalIndex = FocusR./dx; % index
 DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Delay and Crop Samples for CenterLineData from Single Beam
-[ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
+DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+
+%% Delay and Crop for CenterlineData using Aperture Growth (Extra Credit)
+DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
 
 %% Sum Samples Using Apodization
 rfData = ApodizeAndSumSamples( DelayedCroppedSingleBeamSamples );
@@ -60,13 +63,13 @@ Envel = abs(hilbert(Filtamp));
 %% Log compression s that we can see the areas that we are looking at
 x =0.6;
 A = exp(x*log(Envel));
-colorRange = [0 50];
+% colorRange = [0 50];
 
 % A = 20*log10(x*Envel/max(Envel(:)));
 % colorRange=[-50 0]
 
 colormap(gray)
-imagesc(A, colorRange)
+imagesc(A) %, colorRange)
 
 % %% Visualization
 % figure
