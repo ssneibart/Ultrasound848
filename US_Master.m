@@ -31,20 +31,24 @@ FocalIndex = FocusR./dx; % index
 %% Delay Calculations
 [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
+%% Delay Calculations for 5 Foci
+MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
+[MultiFocusDistanceIndexMatrix, MultiFocusPosition_cm] = MultiFocusDelayCalculator(LateralDistanceMatrix, MultiFocusPositionFractions, NumbSamples, dx);
+
 %% Compute Center Elements in Aperture for All Beams
 [numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
 
 %% Delay and Crop Samples using Truncation and Include only Elements in Aperture
-DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+%DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Delay and Crop Samples for CenterLineData from Single Beam
-DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+%DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Delay and Crop for CenterlineData using Aperture Growth (Extra Credit)
-DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
+%DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
 
 %% Sum Samples Using Apodization
-rfData = ApodizeAndSumSamples( DelayedCroppedSingleBeamSamples );
+%rfData = ApodizeAndSumSamples( DelayedCroppedSingleBeamSamples );
 
 %% Constants for Image Generation
 fc = 4*10^6; 
