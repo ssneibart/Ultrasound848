@@ -17,11 +17,11 @@ dx = c/fs; % Sample Length
 ElementSpacing = ElementLocations(2)-ElementLocations(1);
 
 %% Custom Parameters
-FocusFractions = [0.18 0.36 0.54 0.72 0.9]; % where to focus rx beam
+FocusFractions = [1,2,3,4,5]*0.18; % where to focus rx beam
 rxFocus = (dx*NumSamples/2)*FocusFractions; % rxFocus positions in cm
 rxFocusSampleNumbers = round(NumSamples*FocusFractions);
-FNumb = 2;
-NumIncludedSamples = round(0.92*NumSamples); % cut at 92% of samples
+FNumb = 2; % F = z/D (z = focus, D = aperture size)
+NumIncludedSamples = round(0.95*NumSamples); % cut at 92% of samples
 
 %% Delay and Sum Beamforming
 
@@ -41,11 +41,8 @@ end
 %% Combine rfData from multiple rxFoci
 rfData = Combine_rx_Focus_data(rfData_MultiFoc,rxFocusSampleNumbers);
 
-%% Define new variable
-b = rfData;
-
-%% ImageGeneration
-% Bandpass Filter 
+%% ImageGeneration? 
+% Bandpass Filter
 Filt = bandpassfilter(rfData, fs/10,fs);
 % Time Gain Compensation ( gain as a function of time or depth)
 a = 0.0015;
@@ -55,11 +52,8 @@ Envel = abs(hilbert(Filtamp));
 % Log compression so that we can see the areas that we are looking at
 x =0.6;
 A = exp(x*log(Envel));
-colormap(gray)
-imagesc(A)
-
-%% Pause
-% pause(0.2)
+% colormap(gray)
+% imagesc(A)
 
 %% For later
 b = A;

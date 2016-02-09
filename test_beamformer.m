@@ -3,7 +3,7 @@ setup
 mat_file_name = 's2000_hypo_phantom.mat';
 %% Test Code
 data = load(mat_file_name);
-time_limit = 1;
+time_limit = 10;
 run_time = 0;
 run_count = 0;
 fprintf('Testing ')
