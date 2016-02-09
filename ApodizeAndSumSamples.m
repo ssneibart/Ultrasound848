@@ -4,9 +4,9 @@ function [ rfData, ApodizationProfile ] = ApodizeAndSumSamples( DelayedCroppedSa
 %% Extract Data Information
 [NumSamp, NumEl, NumLines] = size(DelayedCroppedSamples);
 
-%% Create Apodization Profile Sin Wave
+%% Create Apodization Profile Sin Wave 
 t = 0.5:1:NumEl-0.5;
-A = 1; % Amplitude of apodization
+A = 1000; % Amplitude of apodization
 ApodizationProfile = A*sin(pi*t/NumEl); % half-sine wave with length equal to number of elements
 
 %% Apply Apodization to Samples
