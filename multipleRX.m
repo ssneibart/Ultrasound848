@@ -20,7 +20,7 @@ dt = 1/fs; % s
 dx = c*dt; % cm
 
 %% Custom Parameters
-FocusFractions = [1,2,3,4,5]*0.18; % where to focus rx beam
+FocusFractions = [1,2,3,4,5]*0.15; % where to focus rx beam
 rxFocus = (dx*NumSamples/2)*FocusFractions; % rxFocus positions in cm
 rxFocusSampleNumers = round(NumSamples*FocusFractions);
 NumIncludedSamples = round(0.92*NumSamples); % cut at 92% of samples, only works for values 81-98
@@ -30,7 +30,7 @@ NumIncludedSamples = round(0.92*NumSamples); % cut at 92% of samples, only works
 
 %% Delay and Sum Beamforming
 
-for i =1:5 % loop through rxFoci
+for i =1:5 % loop through 5 rxFoci
     
     % Compute Delays
     [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, rxFocus(i), dx);
