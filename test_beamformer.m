@@ -3,7 +3,7 @@ setup
 mat_file_name = 's2000_hypo_phantom.mat';
 %% Test Code
 data = load(mat_file_name);
-time_limit = 10;
+time_limit = 1;
 run_time = 0;
 run_count = 0;
 fprintf('Testing ')
@@ -22,6 +22,7 @@ fprintf('done\n')
 fprintf('total runs completed = %g\n',run_count);
 fprintf('elapsed run time = %g seconds\n',run_time);
 fprintf('average run time = %g seconds\n',run_time/run_count)
-imagesc(x,z,b,[-40 0]);
-axis image
+%imagesc(x,z,b,[-40 0]);
+imagesc(b)
+% axis image
 shg

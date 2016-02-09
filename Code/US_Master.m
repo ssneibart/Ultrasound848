@@ -39,7 +39,7 @@ MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
 [numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
 
 %% Delay and Crop Samples using Truncation and Include only Elements in Aperture
-%DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Delay and Crop Samples for CenterLineData from Single Beam
 %DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
@@ -48,10 +48,10 @@ MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
 %DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
 
 %% Delay and Crop for Multiple rxFocus
-DelayedCroppedMultipleFocusSamples = DelayandCropMultipleFocusSamples(MultiFocusDistanceIndexMatrix,M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines, MultiFocusRangeSampleIndices );
+% DelayedCroppedMultipleFocusSamples = DelayandCropMultipleFocusSamples(MultiFocusDistanceIndexMatrix,M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines, MultiFocusRangeSampleIndices );
 
 %% Sum Samples Using Apodization
-rfData = ApodizeAndSumSamples( DelayedCroppedMultipleFocusSamples );
+[rfData, apod_profile] = ApodizeAndSumSamples( DelayedCroppedSamples );
 
 %% Constants for Image Generation
 fc = 4*10^6; 
