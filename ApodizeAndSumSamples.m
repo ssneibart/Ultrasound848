@@ -8,7 +8,7 @@ function [ rfData, ApodizationProfile ] = ApodizeAndSumSamples( DelayedCroppedSa
 t = 0.5:1:NumEl-0.5;
 A = 1000; % Amplitude of apodization
 ApodizationProfile = A*sin(pi*t/NumEl); % half-sine wave with length equal to number of elements
-
+%ApodizationProfile = A*sin(pi*(t+1.5*NumEl)/NumEl/4);
 %% Apply Apodization to Samples
 ApodizationMatrix = repmat(ApodizationProfile,NumSamp,1,NumLines);
 ApodizedSamples   = ApodizationMatrix.*DelayedCroppedSamples;
