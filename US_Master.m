@@ -1,7 +1,7 @@
 %% US Master Code
 
 %% Start
-clear; close all; clc;
+clear; %close all; clc;
 
 %% Load Data and Constants
 cd ./data/ % go into data directory
@@ -39,7 +39,7 @@ DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElem
 
 %% Delay and Crop Samples for CenterLineData from Single Beam
 [ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
-
+[ DelayedCroppedSingleBeamSamples1 ] = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 %% Sum Samples Using Apodization
 rfData = ApodizeAndSumSamples( DelayedCroppedSingleBeamSamples );
 
@@ -64,7 +64,7 @@ colorRange = [0 50];
 
 % A = 20*log10(x*Envel/max(Envel(:)));
 % colorRange=[-50 0]
-
+figure(1)
 colormap(gray)
 imagesc(A, colorRange)
 
