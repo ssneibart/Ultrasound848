@@ -1,4 +1,4 @@
-function [ b, x, z ] = beamform_tjg17( rf, acq_params, bf_params )
+function [ b, x, z ] = beamform_tjg17_ssn6_bz45_jko11( rf, acq_params, bf_params )
 %Beamformer for code derby
 % variable descriptions can be found on code derby presentation outline
 
