@@ -1,0 +1,218 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>US Master Code</title><meta name="generator" content="MATLAB 8.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-02-09"><meta name="DC.source" content="US_Master.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>US Master Code</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Start</a></li><li><a href="#2">Load Data and Constants</a></li><li><a href="#3">Other Constants</a></li><li><a href="#4">Time and Space Intervals</a></li><li><a href="#5">Other</a></li><li><a href="#6">Spatial Location Calculations</a></li><li><a href="#7">Delay Calculations</a></li><li><a href="#8">Delay Calculations for 5 Foci</a></li><li><a href="#9">Compute Center Elements in Aperture for All Beams</a></li><li><a href="#10">Delay and Crop Samples using Truncation and Include only Elements in Aperture</a></li><li><a href="#11">Delay and Crop Samples for CenterLineData from Single Beam</a></li><li><a href="#12">Delay and Crop for CenterlineData using Aperture Growth (Extra Credit)</a></li><li><a href="#13">Delay and Crop for Multiple rxFocus</a></li><li><a href="#14">Sum Samples Using Apodization</a></li><li><a href="#15">Constants for Image Generation</a></li><li><a href="#16">Bandpass Filter</a></li><li><a href="#17">Time Gain Compensation ( gain as a function of time or depth)</a></li><li><a href="#18">Demodulation (Envelope Detection)</a></li><li><a href="#19">Log compression s that we can see the areas that we are looking at</a></li><li><a href="#20">Ranges</a></li><li><a href="#21">Image Formation</a></li></ul></div><h2>Start<a name="1"></a></h2><pre class="codeinput">clear; <span class="comment">%close all; clc;</span>
+</pre><h2>Load Data and Constants<a name="2"></a></h2><pre class="codeinput">cd <span class="string">./data/</span> <span class="comment">% go into data directory</span>
+[M,NumbLines,NumbElements,NumbSamples] = readBinData(<span class="string">'imageData_PlaneWave.bin'</span>);
+[ElementSpacing] = readTransducerParams();
+[BeamSpacing, fs, FocusR, FocusT, FNumb, t0] = readImageParams();
+[c] = readConstants();
+cd <span class="string">..</span> <span class="comment">% go back to coding directory</span>
+</pre><h2>Other Constants<a name="3"></a></h2><pre class="codeinput">F_bf = 2.5; <span class="comment">% cm</span>
+
+bw = 0.55;
+x = 0.6; <span class="comment">% compressive value</span>
+ReceiveAperture = FocusR/FNumb;
+ReceiveDepth = 3; <span class="comment">% cm</span>
+</pre><h2>Time and Space Intervals<a name="4"></a></h2><pre class="codeinput">dt = 1/fs; <span class="comment">% s</span>
+dx = c*dt; <span class="comment">% cm</span>
+</pre><h2>Other<a name="5"></a></h2><pre class="codeinput">FocalIndex = FocusR./dx; <span class="comment">% index</span>
+</pre><h2>Spatial Location Calculations<a name="6"></a></h2><pre class="codeinput">[BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator(BeamSpacing, NumbLines, ElementSpacing, NumbElements, dx, NumbSamples,t0);
+</pre><h2>Delay Calculations<a name="7"></a></h2><pre class="codeinput">[LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
+</pre><h2>Delay Calculations for 5 Foci<a name="8"></a></h2><pre class="codeinput">MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
+[MultiFocusDistanceIndexMatrix, MultiFocusPosition_cm, MultiFocusRangeSampleIndices] = MultiFocusDelayCalculator(LateralDistanceMatrix, MultiFocusPositionFractions, NumbSamples, dx);
+</pre><h2>Compute Center Elements in Aperture for All Beams<a name="9"></a></h2><pre class="codeinput">[numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
+</pre><h2>Delay and Crop Samples using Truncation and Include only Elements in Aperture<a name="10"></a></h2><pre class="codeinput">DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+</pre><h2>Delay and Crop Samples for CenterLineData from Single Beam<a name="11"></a></h2><pre class="codeinput"><span class="comment">%[ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);</span>
+<span class="comment">%[ DelayedCroppedSingleBeamSamples1 ] = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );</span>
+
+<span class="comment">%DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );</span>
+</pre><h2>Delay and Crop for CenterlineData using Aperture Growth (Extra Credit)<a name="12"></a></h2><pre class="codeinput"><span class="comment">%DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);</span>
+</pre><h2>Delay and Crop for Multiple rxFocus<a name="13"></a></h2><pre class="codeinput"><span class="comment">%DelayedCroppedMultipleFocusSamples = DelayandCropMultipleFocusSamples(MultiFocusDistanceIndexMatrix,M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines, MultiFocusRangeSampleIndices );</span>
+</pre><h2>Sum Samples Using Apodization<a name="14"></a></h2><pre class="codeinput">rfData = ApodizeAndSumSamples( DelayedCroppedSamples );
+</pre><h2>Constants for Image Generation<a name="15"></a></h2><pre class="codeinput">fc = 4*10^6;
+fs = 40*10^6;
+</pre><h2>Bandpass Filter<a name="16"></a></h2><pre class="codeinput">Filt = bandpassfilter(rfData, fc,fs);
+</pre><h2>Time Gain Compensation ( gain as a function of time or depth)<a name="17"></a></h2><pre class="codeinput">a = 0.0015;
+Filtamp = TGC(Filt, a);
+</pre><h2>Demodulation (Envelope Detection)<a name="18"></a></h2><pre class="codeinput">Envel = abs(hilbert(Filtamp));
+</pre><h2>Log compression s that we can see the areas that we are looking at<a name="19"></a></h2><pre class="codeinput">x =0.6;
+A = exp(x*log(Envel));
+<span class="comment">% colorRange = [0 50];</span>
+</pre><h2>Ranges<a name="20"></a></h2><pre class="codeinput">lateralRange = NumbLines*BeamSpacing;
+lateral = (-lateralRange/2:BeamSpacing:lateralRange/2)*10;
+
+axialRangetime = size(A,1)*dt;
+axialRangem = axialRangetime*c/2;
+axial  = (0:dt*c/2:axialRangem)*10;
+</pre><h2>Image Formation<a name="21"></a></h2><pre class="codeinput">figure
+colormap(gray)
+imagesc(lateral,axial,A) <span class="comment">% colorRange)</span>
+ylabel(<span class="string">'Axial (mm)'</span>)
+xlabel(<span class="string">'Lateral (mm)'</span>)
+axis <span class="string">image</span>
+</pre><img vspace="5" hspace="5" src="US_Master_01.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% US Master Code
+
+%% Start
+clear; %close all; clc;
+
+%% Load Data and Constants
+cd ./data/ % go into data directory
+[M,NumbLines,NumbElements,NumbSamples] = readBinData('imageData_PlaneWave.bin');
+[ElementSpacing] = readTransducerParams();
+[BeamSpacing, fs, FocusR, FocusT, FNumb, t0] = readImageParams();
+[c] = readConstants();
+cd .. % go back to coding directory
+
+%% Other Constants
+F_bf = 2.5; % cm
+
+bw = 0.55; 
+x = 0.6; % compressive value
+ReceiveAperture = FocusR/FNumb;
+ReceiveDepth = 3; % cm
+
+%% Time and Space Intervals
+dt = 1/fs; % s
+dx = c*dt; % cm 
+
+%% Other
+FocalIndex = FocusR./dx; % index
+
+%% Spatial Location Calculations
+[BeamLocations, ElementLocations, SampleLocations, SampleIndices] = SpatialLocator(BeamSpacing, NumbLines, ElementSpacing, NumbElements, dx, NumbSamples,t0);
+
+%% Delay Calculations
+[LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
+
+%% Delay Calculations for 5 Foci
+MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
+[MultiFocusDistanceIndexMatrix, MultiFocusPosition_cm, MultiFocusRangeSampleIndices] = MultiFocusDelayCalculator(LateralDistanceMatrix, MultiFocusPositionFractions, NumbSamples, dx);
+
+%% Compute Center Elements in Aperture for All Beams
+[numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
+
+%% Delay and Crop Samples using Truncation and Include only Elements in Aperture
+DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+
+%% Delay and Crop Samples for CenterLineData from Single Beam
+
+%[ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
+%[ DelayedCroppedSingleBeamSamples1 ] = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+
+%DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+
+%% Delay and Crop for CenterlineData using Aperture Growth (Extra Credit)
+%DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
+
+%% Delay and Crop for Multiple rxFocus
+%DelayedCroppedMultipleFocusSamples = DelayandCropMultipleFocusSamples(MultiFocusDistanceIndexMatrix,M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines, MultiFocusRangeSampleIndices );
+
+%% Sum Samples Using Apodization
+rfData = ApodizeAndSumSamples( DelayedCroppedSamples );
+
+%% Constants for Image Generation
+fc = 4*10^6; 
+fs = 40*10^6;
+
+%% Bandpass Filter 
+Filt = bandpassfilter(rfData, fc,fs);
+
+%% Time Gain Compensation ( gain as a function of time or depth)
+a = 0.0015;
+Filtamp = TGC(Filt, a);
+
+%% Demodulation (Envelope Detection)
+Envel = abs(hilbert(Filtamp));
+
+%% Log compression s that we can see the areas that we are looking at
+x =0.6;
+A = exp(x*log(Envel));
+% colorRange = [0 50];
+
+%% Ranges 
+lateralRange = NumbLines*BeamSpacing;
+lateral = (-lateralRange/2:BeamSpacing:lateralRange/2)*10;
+
+axialRangetime = size(A,1)*dt;
+axialRangem = axialRangetime*c/2;
+axial  = (0:dt*c/2:axialRangem)*10; 
+
+
+%% Image Formation 
+figure
+colormap(gray)
+imagesc(lateral,axial,A) % colorRange)
+ylabel('Axial (mm)')
+xlabel('Lateral (mm)')
+axis image
+
+
+##### SOURCE END #####
+--></body></html>
