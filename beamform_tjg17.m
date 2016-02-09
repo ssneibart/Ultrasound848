@@ -2,9 +2,6 @@ function [ b, x, z ] = beamform_tjg17( rf, acq_params, bf_params )
 %Beamformer for code derby
 % variable descriptions can be found on code derby presentation outline
 
-%% Extract Size from RF
-[NumSamples,NumElements,NumLines]=size(rf);
-
 %% Extract Acquisition Parameters from Acquisition Parameters struct
 c  = 100*acq_params.c; % cm/s
 fs = acq_params.fs;
@@ -19,6 +16,11 @@ FocusFractions = bf_params.FocusFractions;
 FNumb          = bf_params.FNumb;
 Gain           = bf_params.Gain;
 SampleFraction = bf_params.SampleFraction;
+
+%% Time Delay and Extract Size from RF
+% Only include samples after t0
+% rf = rf(t0:end,:,:); % too slow not included
+[NumSamples,NumElements,NumLines]=size(rf);
 
 %% Derived Parameters
 dx = c/fs; % Sample Length
