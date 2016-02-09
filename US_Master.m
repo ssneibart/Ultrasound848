@@ -31,17 +31,32 @@ FocalIndex = FocusR./dx; % index
 %% Delay Calculations
 [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
+%% Delay Calculations for 5 Foci
+MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
+[MultiFocusDistanceIndexMatrix, MultiFocusPosition_cm, MultiFocusRangeSampleIndices] = MultiFocusDelayCalculator(LateralDistanceMatrix, MultiFocusPositionFractions, NumbSamples, dx);
+
 %% Compute Center Elements in Aperture for All Beams
 [numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
 
 %% Delay and Crop Samples using Truncation and Include only Elements in Aperture
-DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+%DelayedCroppedSamples  = DelayandCropSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
 
 %% Delay and Crop Samples for CenterLineData from Single Beam
+<<<<<<< HEAD
 [ DelayedCroppedSingleBeamSamples ] = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
 [ DelayedCroppedSingleBeamSamples1 ] = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+=======
+%DelayedCroppedSingleBeamSamples = DelayandCropSingleBeamSamples( DistanceIndexMatrix, M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines );
+
+%% Delay and Crop for CenterlineData using Aperture Growth (Extra Credit)
+%DelayedCroppedSingleBeamApertureGrowthSamples = DelayandCropSingleBeamSamples_ApertureGrowthComp( DistanceIndexMatrix, M, NumbSamples, NumbLines, c, fs, LateralDistanceMatrix, FocusR, FNumb, ElementSpacing, dx);
+
+%% Delay and Crop for Multiple rxFocus
+DelayedCroppedMultipleFocusSamples = DelayandCropMultipleFocusSamples(MultiFocusDistanceIndexMatrix,M, CenterElementNum, NumbSamples, numElements_HalfAperture, NumbLines, MultiFocusRangeSampleIndices );
+
+>>>>>>> origin/master
 %% Sum Samples Using Apodization
-rfData = ApodizeAndSumSamples( DelayedCroppedSingleBeamSamples );
+rfData = ApodizeAndSumSamples( DelayedCroppedMultipleFocusSamples );
 
 %% Constants for Image Generation
 fc = 4*10^6; 
@@ -60,13 +75,13 @@ Envel = abs(hilbert(Filtamp));
 %% Log compression s that we can see the areas that we are looking at
 x =0.6;
 A = exp(x*log(Envel));
-colorRange = [0 50];
+% colorRange = [0 50];
 
 % A = 20*log10(x*Envel/max(Envel(:)));
 % colorRange=[-50 0]
 figure(1)
 colormap(gray)
-imagesc(A, colorRange)
+imagesc(A) %, colorRange)
 
 % %% Visualization
 % figure
