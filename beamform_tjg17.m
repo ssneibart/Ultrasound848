@@ -21,7 +21,7 @@ FocusFractions = [1,2,3,4,5]*0.18; % where to focus rx beam
 rxFocus = (dx*NumSamples/2)*FocusFractions; % rxFocus positions in cm
 rxFocusSampleNumbers = round(NumSamples*FocusFractions);
 FNumb = 2; % F = z/D (z = focus, D = aperture size)
-NumIncludedSamples = round(0.95*NumSamples); % cut at 92% of samples
+NumIncludedSamples = round(0.92*NumSamples); % cut at 92% of samples, only works for values 81-98
 
 %% Delay and Sum Beamforming
 
