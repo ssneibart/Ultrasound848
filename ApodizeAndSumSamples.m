@@ -4,11 +4,15 @@ function [ rfData, ApodizationProfile ] = ApodizeAndSumSamples( DelayedCroppedSa
 %% Extract Data Information
 [NumSamp, NumEl, NumLines] = size(DelayedCroppedSamples);
 
-%% Create Apodization Profile Sin Wave 
+%% Create Apodization Profile Sin Wave
+% half-sine wave with length equal to number of elements
 t = 0.5:1:NumEl-0.5;
 A = 1000; % Amplitude of apodization
-ApodizationProfile = A*sin(pi*t/NumEl); % half-sine wave with length equal to number of elements
-%ApodizationProfile = A*sin(pi*(t+1.5*NumEl)/NumEl/4);
+
+%ApodizationProfile = A*sin(pi*t/NumEl); % Profile 1
+ApodizationProfile = A*sin(pi*(t+1.5*NumEl)/NumEl/4); % Profile 2
+%ApodizationProfile = ones(1,NumEl); % Flat Apodization
+
 %% Apply Apodization to Samples
 ApodizationMatrix = repmat(ApodizationProfile,NumSamp,1,NumLines);
 ApodizedSamples   = ApodizationMatrix.*DelayedCroppedSamples;
@@ -17,4 +21,3 @@ ApodizedSamples   = ApodizationMatrix.*DelayedCroppedSamples;
 rfData = reshape(sum(ApodizedSamples,2),NumSamp,NumLines);
 
 end
-
