@@ -32,10 +32,6 @@ FocalIndex = FocusR./dx; % index
 %% Delay Calculations
 [LateralDistanceMatrix, DistanceIndexMatrix] = DelayCalculator(BeamLocations, ElementLocations, FocusR,dx);
 
-%% Delay Calculations for 5 Foci
-%MultiFocusPositionFractions = [0.18 0.36 0.54 0.72 0.90];
-%[MultiFocusDistanceIndexMatrix, MultiFocusPosition_cm, MultiFocusRangeSampleIndices] = MultiFocusDelayCalculator(LateralDistanceMatrix, MultiFocusPositionFractions, NumbSamples, dx);
-
 %% Compute Center Elements in Aperture for All Beams
 [numElements_HalfAperture, CenterElementNum]  = ComputeApertureElements( LateralDistanceMatrix, FocusR, FNumb, ElementSpacing );
 
